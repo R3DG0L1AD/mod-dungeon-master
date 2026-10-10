@@ -479,7 +479,8 @@ void DungeonMasterMgr::LoadRewardItems()
         "SELECT entry, RequiredLevel, Quality, InventoryType, class, subclass, "
         "AllowableClass, ItemLevel "
         "FROM item_template "
-        "WHERE Quality >= 2 AND Quality <= 4 "
+        "WHERE entry <= 56806 "   // FamilyLAN: stock 3.3.5 items only (no custom mounts/tabards/scrolls)
+        "AND Quality >= 2 AND Quality <= 4 "
         "AND RequiredLevel > 0 AND RequiredLevel <= 80 "
         "AND InventoryType > 0 AND InventoryType <= 26 "
         "AND InventoryType NOT IN (18, 19, 24) "
@@ -526,7 +527,8 @@ void DungeonMasterMgr::LoadLootPool()
     QueryResult result = WorldDatabase.Query(
         "SELECT entry, RequiredLevel, Quality, class, subclass, AllowableClass, ItemLevel "
         "FROM item_template "
-        "WHERE Quality <= 4 "
+        "WHERE entry <= 56806 "   // FamilyLAN: stock 3.3.5 items only
+        "AND Quality <= 4 "
         "AND ItemLevel <= 300 "
         "AND SellPrice > 0 "
         "AND class IN (0, 2, 4, 7, 15) "
